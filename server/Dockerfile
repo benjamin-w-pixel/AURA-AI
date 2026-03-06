@@ -11,20 +11,22 @@ RUN npx prisma generate
 
 COPY . .
 
-RUN npm run build || true # In case there's a build script, though index.ts is usually run via ts-node or compiled
+RUN npm run build
 
 # Production stage
 FROM node:20-alpine
 
 WORKDIR /app
 
+# Add production dependencies only to keep image small
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist || true
+COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/index.ts ./
 COPY --from=builder /app/tsconfig.json ./
 
 EXPOSE 5000
 
-CMD ["npx", "ts-node", "index.ts"]
+# Railway will use the 'start' script from package.json which points to dist/index.js
+CMD ["npm", "start"]
