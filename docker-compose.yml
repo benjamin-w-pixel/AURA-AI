@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./server
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - DATABASE_URL=file:./prisma/dev.db
+      - ALLOWED_ORIGIN=http://localhost:8080 # This would be the frontend URL in production
+    volumes:
+      - ./server/prisma:/app/prisma
+
+  frontend:
+    build: 
+      context: .
+      args:
+        - VITE_API_URL=http://localhost:5000/api
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

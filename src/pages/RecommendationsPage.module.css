@@ -1,0 +1,117 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-tertiary);
+  font-size: 0.9375rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btnPrimary, .btnSecondary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: var(--transition-normal);
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, var(--accent-vibrant) 0%, var(--accent-secondary) 100%);
+  color: white;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.btnSecondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.btnPrimary:hover, .btnSecondary:hover {
+  transform: translateY(-2px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.sparkleIcon {
+  color: var(--accent-secondary);
+}
+
+.widgetGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.performanceCard {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.healthMetric {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.healthMetric span:first-child {
+  width: 80px;
+  color: var(--text-secondary);
+}
+
+.progressBar {
+  flex: 1;
+  height: 6px;
+  background-color: var(--bg-primary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 3px;
+}
