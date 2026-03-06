@@ -130,15 +130,25 @@ app.get('/api/reports/behavior/export', authenticateToken, (req: Request, res: R
 // Products
 app.get('/api/products', async (req: Request, res: Response) => {
   try {
-    const products = await prisma.product.findMany();
-    // Map to match frontend expectations (imageUrl -> image) if needed, though they look similar
+    let products = await prisma.product.findMany();
+    
+    // Fallback: If no products found, return mock data for the demo
+    if (products.length === 0) {
+      console.log('No products found in DB, returning mock fallback');
+      return res.json([
+        { id: '1', name: 'Ultra Boost Sneakers', price: 120, category: 'Footwear', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff' },
+        { id: '3', name: 'Wireless Headphones', price: 250, category: 'Electronics', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e' }
+      ]);
+    }
+
     const mappedProducts = products.map(p => ({
       ...p,
       image: p.imageUrl
     }));
     res.json(mappedProducts);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch products' });
+    console.error('DATABASE ERROR:', error);
+    res.status(500).json({ error: 'Failed to fetch products', details: error instanceof Error ? error.message : String(error) });
   }
 });
 // Recommendations
