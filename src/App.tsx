@@ -7,6 +7,7 @@ import { EmailCampaignsPage } from './pages/EmailCampaigns'
 import { DynamicPricingPage } from './pages/DynamicPricing'
 import { SettingsPage } from './pages/Settings'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard')
@@ -37,6 +38,7 @@ function App() {
           {activePage === 'settings' && <SettingsPage />}
         </motion.div>
       </AnimatePresence>
+      <Analytics />
     </Layout>
   )
 }
